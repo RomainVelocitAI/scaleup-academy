@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test Login ScaleUp Academy</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+            border-bottom: 2px solid #4CAF50;
+            padding-bottom: 10px;
+        }
+        .info-box {
+            background: #e3f2fd;
+            border-left: 4px solid #2196F3;
+            padding: 15px;
+            margin: 20px 0;
+        }
+        .credentials {
+            background: #f1f8e9;
+            border: 1px solid #8bc34a;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+        .credentials strong {
+            display: inline-block;
+            width: 100px;
+        }
+        .button-group {
+            margin-top: 20px;
+        }
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            margin: 5px;
+            background: #4CAF50;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+        .btn:hover {
+            background: #45a049;
+        }
+        .btn-secondary {
+            background: #2196F3;
+        }
+        .btn-secondary:hover {
+            background: #1976D2;
+        }
+        .status {
+            margin-top: 20px;
+            padding: 10px;
+            border-radius: 5px;
+            display: none;
+        }
+        .status.success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+            display: block;
+        }
+        .status.error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎓 ScaleUp Academy - Test d'accès</h1>
+        
+        <div class="info-box">
+            <strong>État du serveur :</strong> Le serveur de développement est démarré sur <a href="http://localhost:3000" target="_blank">http://localhost:3000</a>
+        </div>
+
+        <div class="credentials">
+            <h3>📧 Compte de démonstration</h3>
+            <p><strong>Email :</strong> demo@scaleupacademy.com</p>
+            <p><strong>Password :</strong> DemoPass123!</p>
+        </div>
+
+        <div class="button-group">
+            <a href="http://localhost:3000/auth/login" class="btn" target="_blank">
+                🔐 Page de connexion
+            </a>
+            <a href="http://localhost:3000/auth/register" class="btn btn-secondary" target="_blank">
+                ✏️ Créer un nouveau compte
+            </a>
+        </div>
+
+        <div class="info-box" style="margin-top: 30px;">
+            <h3>💡 Instructions :</h3>
+            <ol>
+                <li>Cliquez sur "Page de connexion" pour accéder au formulaire</li>
+                <li>Utilisez les identifiants ci-dessus OU créez un nouveau compte</li>
+                <li>Une fois connecté, vous serez redirigé vers le dashboard</li>
+            </ol>
+        </div>
+
+        <div class="info-box" style="background: #fff3cd; border-color: #ffc107;">
+            <h3>⚠️ Note importante :</h3>
+            <p>Le compte de démonstration n'a pas pu être créé automatiquement à cause d'une erreur de configuration de la base de données. Vous pouvez :</p>
+            <ul>
+                <li>Créer un nouveau compte via le formulaire d'inscription</li>
+                <li>Utiliser l'authentification OAuth (Google/GitHub)</li>
+            </ul>
+        </div>
+
+        <div id="status" class="status"></div>
+    </div>
+
+    <script>
+        // Vérifier si le serveur est accessible
+        fetch('http://localhost:3000/api/health')
+            .then(response => {
+                if (response.ok) {
+                    document.getElementById('status').className = 'status success';
+                    document.getElementById('status').innerHTML = '✅ Le serveur est accessible et fonctionne correctement';
+                }
+            })
+            .catch(error => {
+                // C'est normal si /api/health n'existe pas
+                console.log('Health check:', error);
+            });
+    </script>
+</body>
+</html>
